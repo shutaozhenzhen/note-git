@@ -10,7 +10,6 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:note-git.helloWorld"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
