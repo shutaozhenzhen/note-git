@@ -17,6 +17,12 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showErrorMessage("Your vscode.git extension are disabled. You can go to setting and search `git:enabled` to enable it.");
 		return;
 	}
+	vscode.workspace.onDidChangeTextDocument(event => {
+		console.log(event);
+		console.log(event.document);
+		console.log(event.reason);
+		console.log(event.contentChanges);
+	}, null, context.subscriptions);
 }
 
 // this method is called when your extension is deactivated
