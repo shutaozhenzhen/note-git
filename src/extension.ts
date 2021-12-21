@@ -64,7 +64,20 @@ export function activate(context: vscode.ExtensionContext) {
 		/**
 		 * save file
 		 */
-		curDocument.save();
+		const saved=await curDocument.save();
+		/**
+		 * todo
+		 * curRepo.status().then((...args)=>log(args));
+		 * curRepo.add([curDocument.uri.path]);
+		 */
+		//
+		if(saved){
+			await curRepo.commit(event.contentChanges.map((item)=>JSON.stringify(item["text"])).join('\n'),{
+				all:true,
+				empty:true
+			});
+		}
+		
 	}, null, context.subscriptions);
 }
 
