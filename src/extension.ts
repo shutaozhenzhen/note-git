@@ -4,11 +4,12 @@ import * as vscode from 'vscode';
 import {getGitApi} from './gitExtension'; 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
+const log=console.log;
 export function activate(context: vscode.ExtensionContext) {
 	
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "note-git" is now active!');
+	log('Congratulations, your extension "note-git" is now active!');
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
@@ -18,10 +19,10 @@ export function activate(context: vscode.ExtensionContext) {
 		return;
 	}
 	vscode.workspace.onDidChangeTextDocument(event => {
-		console.log(event);
-		console.log(event.document);
-		console.log(event.reason);
-		console.log(event.contentChanges);
+		log(event);
+		log(event.document);
+		log(event.reason);
+		log(event.contentChanges);
 	}, null, context.subscriptions);
 }
 
