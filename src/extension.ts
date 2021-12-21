@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import {getGitApi} from './gitExtension'; 
 import {log} from './log'; 
+import * as folder from "./folder"
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -20,9 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 	vscode.workspace.onDidChangeTextDocument(event => {
 		log(event);
-		log(event.document);
-		log(event.reason);
-		log(event.contentChanges);
+		log(folder.getCurFolders());
 	}, null, context.subscriptions);
 }
 
