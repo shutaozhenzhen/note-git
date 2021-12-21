@@ -19,11 +19,11 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showErrorMessage("Your vscode.git extension are disabled. You can go to setting and search `git:enabled` to enable it.");
 		return;
 	}
-	vscode.workspace.onDidChangeTextDocument(event => {
+	vscode.workspace.onDidChangeTextDocument(async event => {
 		/**
 		 * do have changes
 		 */
-		if(event.contentChanges.length!==0){
+		if(event.contentChanges.length===0){
 			return;
 		}
 		/**
@@ -61,6 +61,23 @@ export function activate(context: vscode.ExtensionContext) {
 		if(!curDocument.uri.path.includes(curRepo.rootUri.path)){
 			return;
 		}
+		/**
+		 * save file
+		 */
+		const saved=await curDocument.save();
+		/**
+		 * todo
+		 * curRepo.status().then((...args)=>log(args));
+		 * curRepo.add([curDocument.uri.path]);
+		 */
+		//
+		if(saved){
+			await curRepo.commit(event.contentChanges.map((item)=>JSON.stringify(item["text"])).join('\n'),{
+				all:true,
+				empty:true
+			});
+		}
+		
 	}, null, context.subscriptions);
 }
 
