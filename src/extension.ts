@@ -20,8 +20,47 @@ export function activate(context: vscode.ExtensionContext) {
 		return;
 	}
 	vscode.workspace.onDidChangeTextDocument(event => {
-		log(event);
-		log(folder.getCurFolders());
+		/**
+		 * do have changes
+		 */
+		if(event.contentChanges.length!==0){
+			return;
+		}
+		/**
+		 * not editing a untitled file
+		 */
+		const curDocument=event.document;
+		if(curDocument.isUntitled){
+			return;
+		}
+		/**
+		 * file is dirty
+		 */
+		if(!curDocument.isDirty){
+			return;
+		}
+		/**
+		 * only one folder in workplace
+		 */
+		const folders=folder.getCurFolders();
+		if(folders.length!==1){
+			return;
+		}
+		const [curfolder]=folders;
+		/**
+		 * this folder is in git repositorie
+		 */
+		const repositories=gitApi.repositories;
+		if(repositories.length!==1){
+			return;
+		}
+		/**
+		 * cur file is in git repositorie
+		 */
+		const [curRepo]=repositories;
+		if(!curDocument.uri.path.includes(curRepo.rootUri.path)){
+			return;
+		}
 	}, null, context.subscriptions);
 }
 
