@@ -23,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 		/**
 		 * do have changes
 		 */
-		if(event.contentChanges.length!==0){
+		if(event.contentChanges.length===0){
 			return;
 		}
 		/**
