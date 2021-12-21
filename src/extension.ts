@@ -61,6 +61,10 @@ export function activate(context: vscode.ExtensionContext) {
 		if(!curDocument.uri.path.includes(curRepo.rootUri.path)){
 			return;
 		}
+		/**
+		 * save file
+		 */
+		curDocument.save();
 	}, null, context.subscriptions);
 }
 
