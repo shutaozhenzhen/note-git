@@ -3,6 +3,7 @@
 	"displayName": "note-git",
 	"description": "a VSCode Extension to auto commit all change by git",
 	"version": "0.0.1",
+	"publisher": "The-book",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
@@ -50,5 +51,9 @@
 	},
 	"extensionDependencies":[
 		"vscode.git"
-	]
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/shutaozhenzhen/note-git.git"
+	}
 }
